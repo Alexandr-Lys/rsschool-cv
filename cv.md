@@ -11,13 +11,10 @@
 * **GitHub:** alexandr-lys
 * **Telegram** @alexLysRSS
 
-***
-
 ## About Me
 
 Programming attracted me back in my student years, when we studied the programming of microcontrollers. I liked web development for its boundlessness and the minimum of the necessary physical resources for the production of a product, in this area it is possible and necessary to constantly develop and there is no visible end. I like working in a team. My goal is to become a good front-end developer.
 
-***
 
 ## Skills
 
@@ -27,7 +24,6 @@ Programming attracted me back in my student years, when we studied the programmi
 * Git and GitHub
 * IntelliJ IDEA
 
-***
 
 ## Code Example
 
@@ -55,14 +51,10 @@ function anagrams(word, words) {
 }
 ```
 
-***
 
 ## Experience
-github.com/Alexandr-Lys/rsschool-cv
+[rsschool-cv](github.com/Alexandr-Lys/rsschool-cv)
 
-***
 
 ## English
 Pre-Intermediate
-
-***
