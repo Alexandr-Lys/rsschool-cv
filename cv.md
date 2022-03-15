@@ -1,6 +1,6 @@
 # Alexandr Lysenko
 ***
-<img src="img/photo.png" alt="Photo" style="width:30%;height:30%;">
+<img src="photo.png" alt="Photo" style="width:30%;height:30%;">
 
 ***
 ## Contacts
