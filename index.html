@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CV</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<h1>Alexandr Lysenko</h1>
+<hr>
+<img src="photo.png" alt="Photo" style="width:30%;height:30%;">
+<hr>
+<h2>Contacts</h2>
+<ul>
+    <li><b>Location:</b> Krasnodar, Russia</li>
+    <li><b>Phone:</b> +7 (962) 878-67-05</li>
+    <li><b>Email:</b> a.lysenko00@gmail.com</li>
+    <li><b>GitHub:</b> alexandr-lys</li>
+    <li><b>Telegram</b> @alexLysRSS</li>
+</ul>
+
+<h2>About Me</h2>
+<p>Programming attracted me back in my student years, when we studied the programming of microcontrollers. I liked web
+    development for its boundlessness and the minimum of the necessary physical resources for the production of a
+    product, in this area it is possible and necessary to constantly develop and there is no visible end. I like working
+    in a team. My goal is to become a good front-end developer.</p>
+
+<h2>Skills</h2>
+<ul>
+    <li>HTML5,CSS3</li>
+    <li>JavaScript Basics</li>
+    <li>React and Redux Basics</li>
+    <li>Git and GitHub</li>
+    <li>IntelliJ IDEA</li>
+</ul>
+<h2>Code Example</h2>
+<p>A function that finds all anagrams of a word from a list. Input data format: word and array with words. The function
+    returns an array of all anagrams, or an empty array if there are none. <br>For example:</p>
+<pre>
+<code>
+anagrams('racer', ['crazer', 'carer', 'racar', 'caers', 'racer']) => ['carer', 'racer']
+
+anagrams('laser', ['lazing', 'lazy',  'lacer']) => []
+</code>
+</pre>
+<p>Code:</p>
+<pre>
+<code>
+function anagrams(word, words) {
+    let newWord = word.split("").sort().join("")
+    let arrAn = []
+    for (let i = 0; i < words.length; i++) {
+        let currentWord = words[i].split("").sort().join("")
+        if (newWord == currentWord) {
+            arrAn.push(words[i])
+        }
+    }
+    return arrAn
+}
+</code>
+</pre>
+
+<h2>Experience</h2>
+<a href="https://github.com/Alexandr-Lys/rsschool-cv">rsschool-cv</a>
+
+<h2>English</h2>
+<p>Pre-Intermediate</p>
+</body>
+</html>
