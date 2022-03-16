@@ -53,7 +53,7 @@ function anagrams(word, words) {
 
 
 ## Experience
-[rsschool-cv](github.com/Alexandr-Lys/rsschool-cv)
+[rsschool-cv](https://github.com/Alexandr-Lys/rsschool-cv)
 
 
 ## English
