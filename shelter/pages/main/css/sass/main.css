@@ -2,13 +2,19 @@
   font-family: "Georgia";
   font-style: normal;
   font-weight: 400;
-  src: url("../../../../assets/fonts/Georgia.ttf") format("truetype"), url("../../../../assets/fonts/Georgia.woff") format("woff"), url("../../../../assets/fonts/Georgia.eot") format("embedded-opentype");
+  src: url("../../../assets/fonts/Georgia.ttf") format("truetype"), url("../../../assets/fonts/Georgia.woff") format("woff"), url("../../../assets/fonts/Georgia.eot") format("embedded-opentype");
 }
 @font-face {
   font-family: "Arial";
   font-style: normal;
   font-weight: 400;
-  src: url("../../../../assets/fonts/ArialMT.ttf") format("truetype"), url("../../../../assets/fonts/ArialMT.woff") format("woff"), url("../../../../assets/fonts/ArialMT.eot") format("embedded-opentype");
+  src: url("../../../assets/fonts/ArialMT.ttf") format("truetype"), url("../../../assets/fonts/ArialMT.woff") format("woff"), url("../../../assets/fonts/ArialMT.eot") format("embedded-opentype");
+}
+@font-face {
+  font-family: "Arial Italic";
+  font-style: normal;
+  font-weight: 400;
+  src: url("../../../assets/fonts/Arial-ItalicMT.ttf") format("truetype"), url("../../../assets/fonts/Arial-ItalicMT.woff") format("woff"), url("../../../assets/fonts/Arial-ItalicMT.eot") format("embedded-opentype");
 }
 .button-primary {
   background: #F1CDB3;
@@ -25,9 +31,9 @@
   line-height: 130%;
   letter-spacing: 0.06em;
   color: #292929;
-  color: #292929;
 }
 .button-primary:hover {
+  cursor: pointer;
   background: #FDDCC4;
 }
 
@@ -46,9 +52,9 @@
   line-height: 130%;
   letter-spacing: 0.06em;
   color: #292929;
-  color: #292929;
 }
 .button-light:hover {
+  cursor: pointer;
   background: #FDDCC4;
 }
 
@@ -65,6 +71,7 @@
   background: #FFFFFF;
 }
 .button-arrow:hover {
+  cursor: pointer;
   background: #FDDCC4;
 }
 
@@ -82,11 +89,13 @@
   background: #FFFFFF;
 }
 .button-arrow-reverse:hover {
+  cursor: pointer;
   background: #FDDCC4;
 }
 
 * {
   box-sizing: border-box;
+  margin: 0;
 }
 
 .main {
@@ -104,6 +113,7 @@
 .header {
   margin-top: 60px;
   display: flex;
+  align-items: center;
 }
 
 .nav-menu {
@@ -240,7 +250,7 @@
   width: 400px;
   text-align: center;
 }
-.pets .pets__content button {
+.pets .pets__content .button-primary_center {
   margin: 0 auto;
 }
 .pets .pets__content .pets__slider {
@@ -294,26 +304,175 @@
   color: #545454;
 }
 .help .help__list {
-  margin: 150px 87px 0 87px;
+  margin: 60px 85px 43px 85px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  flex-grow: 3;
 }
 .help .help__list .help__list-item {
-  margin: 0 40px 55px 40px;
+  margin: 0 0 55px 120px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
 }
 .help .help__list .help__list-item h4 {
+  margin-top: 30px;
   font-family: "Georgia", serif;
   font-weight: 400;
   font-size: 20px;
   line-height: 23px;
   letter-spacing: 0.06em;
   color: #545454;
+}
+.help .help__list .help__list-item:first-of-type {
+  margin-left: 0;
+}
+.help .help__list .help__list-item:nth-of-type(6) {
+  margin-left: 84px;
+}
+.help .help__list .help__list-item:last-of-type {
+  margin-left: 120px;
+  margin-right: 84px;
+}
+
+.donation {
+  width: 100%;
+  background: #F6F6F6;
+}
+.donation .donation__content {
+  margin: 80px auto 100px;
+  display: flex;
+  justify-content: center;
+}
+.donation .donation__content .donation__img {
+  margin: 11px 30px 0 0;
+  height: max-content;
+}
+.donation .donation__content .donation__content-text {
+  max-width: 32%;
+}
+.donation .donation__content .donation__content-text .donation__content-text-header {
+  margin: 0;
+  max-width: 83%;
+  font-family: "Georgia", serif;
+  font-weight: 400;
+  font-size: 35px;
+  line-height: 130%;
+  letter-spacing: 0.06em;
+  color: #545454;
+}
+.donation .donation__content .donation__content-text h5 {
+  font-family: "Georgia", serif;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 110%;
+  letter-spacing: 0.06em;
+  color: #545454;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.donation .donation__content .donation__content-text p {
+  margin-top: 20px;
+  font-family: "Arial Italic", sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  color: #B2B2B2;
+}
+.donation .donation__content .donation__content-text button {
+  background: #F1CDB3;
+  border-style: none;
+  border-radius: 9px;
+  width: 349px;
+  height: 43px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Georgia", serif;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 115%;
+  letter-spacing: 0.06em;
+  color: #545454;
+}
+.donation .donation__content .donation__content-text button img {
+  margin-right: 15px;
+}
+.donation .donation__content .donation__content-text button:hover {
+  background: #FDDCC4;
+}
+
+.footer {
+  width: 100%;
+  background-image: url(../../../assets/images/noise_lines_transparent@2X.png), radial-gradient(100% 215.42% at 0% 0%, #5B483A 0%, #262425 100%);
+}
+.footer .footer-content {
+  margin-top: 40px;
+  display: flex;
+  justify-content: space-between;
+}
+.footer .footer-content h3 {
+  font-family: "Georgia", serif;
+  font-weight: 400;
+  font-size: 35px;
+  line-height: 130%;
+  letter-spacing: 0.06em;
+  color: #FFFFFF;
+}
+.footer .footer-content p {
+  font-family: "Georgia", serif;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 115%;
+  letter-spacing: 0.06em;
+  color: #F1CDB3;
+}
+.footer .footer-content .contacts {
+  max-width: 24%;
+  margin-top: 16px;
+}
+.footer .footer-content .contacts .contacts__mail {
+  margin: 40px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  justify-content: start;
+}
+.footer .footer-content .contacts .contacts__mail img {
+  margin-right: 20px;
+}
+.footer .footer-content .contacts .contacts__phone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  justify-content: start;
+}
+.footer .footer-content .contacts .contacts__phone img {
+  margin-right: 20px;
+}
+.footer .footer-content .locations {
+  max-width: 26%;
+  margin-top: 16px;
+}
+.footer .footer-content .locations .locations__boston {
+  margin: 34px 0 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  justify-content: start;
+}
+.footer .footer-content .locations .locations__boston img {
+  margin-right: 20px;
+}
+.footer .footer-content .locations .locations__london {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  justify-content: start;
+}
+.footer .footer-content .locations .locations__london img {
+  margin-right: 20px;
 }
 
 /*# sourceMappingURL=main.css.map */
