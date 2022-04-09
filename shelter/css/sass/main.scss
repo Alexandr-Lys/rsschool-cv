@@ -1,133 +1,13 @@
-$light-xl: #FFFFFF;
-$light-l: #F6F6F6;
-$light-s: #FAFAFA;
-
-$dark-s: #CDCDCD;
-$dark-m: #B2B2B2;
-$dark-l: #545454;
-$dark-xl: #4C4C4C;
-$dark-2xl: #444444;
-$dark-3xl: #292929;
-
-$primary: #F1CDB3;
-$primary-light: #FDDCC4;
-
-@font-face {
-  font-family: "Georgia";
-  font-style: normal;
-  font-weight: 400;
-  src: url("../../../assets/fonts/Georgia.ttf") format("truetype"),
-  url("../../../assets/fonts/Georgia.woff") format("woff"),
-  url("../../../assets/fonts/Georgia.eot") format("embedded-opentype");
-}
-
-@font-face {
-  font-family: "Arial";
-  font-style: normal;
-  font-weight: 400;
-  src: url("../../../assets/fonts/ArialMT.ttf") format("truetype"),
-  url("../../../assets/fonts/ArialMT.woff") format("woff"),
-  url("../../../assets/fonts/ArialMT.eot") format("embedded-opentype");
-}
-
-@font-face {
-  font-family: "Arial Italic";
-  font-style: normal;
-  font-weight: 400;
-  src: url("../../../assets/fonts/Arial-ItalicMT.ttf") format("truetype"),
-  url("../../../assets/fonts/Arial-ItalicMT.woff") format("woff"),
-  url("../../../assets/fonts/Arial-ItalicMT.eot") format("embedded-opentype");
-}
-
-
-@mixin text-arial($size, $line-height, $color, $letter-spacing: normal) {
-  font-family: "Arial", sans-serif;
-  font-weight: 400;
-  font-size: $size;
-  line-height: $line-height;
-  letter-spacing: $letter-spacing;
-  color: $color;
-}
-
-@mixin text-georgia($size, $line-height, $color, $letter-spacing: normal) {
-  font-family: "Georgia", serif;
-  font-weight: 400;
-  font-size: $size;
-  line-height: $line-height;
-  letter-spacing: $letter-spacing;
-  color: $color;
-}
-
-@mixin flex-align() {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.button-primary {
-  background: $primary;
-  border-style: none;
-  border-radius: 100px;
-  padding: 15px 45px;
-  height: 52px;
-  @include flex-align();
-  @include text-georgia(17px, 130%, $dark-3xl, 0.06em);
-  &:hover {
-    cursor: pointer;
-    background: $primary-light;
-  }
-}
-
-.button-light {
-  border: 2px solid $primary;
-  border-radius: 100px;
-  padding: 15px 45px;
-  background: $light-xl;
-  @include flex-align();
-  height: 52px;
-  @include text-georgia(17px, 130%, $dark-3xl, 0.06em);
-  &:hover {
-    cursor: pointer;
-    background: $primary-light;
-  }
-}
-
-.button-arrow {
-  width: 52px;
-  height: 52px;
-  border: 2px solid $primary;
-  border-radius: 100px;
-  margin: 0 53px 0 0;
-  @include flex-align();
-  color: $dark-3xl;
-  background: $light-xl;
-
-  &:hover {
-    cursor: pointer;
-    background: $primary-light;
-  }
-}
-
-.button-arrow-reverse {
-  transform: rotate(180deg);
-  width: 52px;
-  height: 52px;
-  border: 2px solid $primary;
-  border-radius: 100px;
-  margin-left: 53px;
-  @include flex-align();
-  color: $dark-3xl;
-  background: $light-xl;
-
-  &:hover {
-    cursor: pointer;
-    background: $primary-light;
-  }
-}
+@import "abstracts/variables";
+@import "abstracts/fonts";
+@import "abstracts/mixins";
+@import "components/buttons";
 
 * {
   box-sizing: border-box;
   margin: 0;
+  text-decoration: none;
+  color: $dark-3xl;
 }
 
 .main {
@@ -174,25 +54,22 @@ $primary-light: #FDDCC4;
   width: 186px;
   height: 60px;
 
-  .logo__title {
+  h1 {
+    margin: 0;
     @include text-georgia(32px, 110%, $primary, 0.06em);
-    display: flex;
-    align-items: center;
   }
 
   .logo__subtitle {
     margin-top: 9px;
     margin-left: 4px;
     @include text-arial(13px, 15px, $light-xl, 0.1em);
-    display: flex;
-    align-items: center;
   }
 }
 
 .start-screen {
   width: 100%;
   height: auto;
-  background-image: url(../../../assets/images/noise_lines_transparent@2X.png), radial-gradient(100% 215.42% at 0% 0%, #5B483A 0%, #262425 100%);
+  background-image: url(../../assets/images/noise_lines_transparent@2X.png), radial-gradient(100% 215.42% at 0% 0%, #5B483A 0%, #262425 100%);
 }
 
 .start-screen__content {
@@ -211,7 +88,7 @@ $primary-light: #FDDCC4;
     margin-top: 163px;
     //position: absolute;
     //top: 163px;
-    h1 {
+    h2 {
       margin: 0;
       max-width: 87%;
       @include text-georgia(44px, 57px, $light-xl);
@@ -410,6 +287,7 @@ $primary-light: #FDDCC4;
             margin-right: 15px;
         }
         &:hover {
+          cursor: pointer;
           background: $primary-light;
         }
       }
@@ -419,7 +297,7 @@ $primary-light: #FDDCC4;
 
 .footer {
   width: 100%;
-  background-image: url(../../../assets/images/noise_lines_transparent@2X.png), radial-gradient(100% 215.42% at 0% 0%, #5B483A 0%, #262425 100%);
+  background-image: url(../../assets/images/noise_lines_transparent@2X.png), radial-gradient(100% 215.42% at 0% 0%, #5B483A 0%, #262425 100%);
 
   .footer-content {
     margin-top: 40px;
@@ -430,7 +308,7 @@ $primary-light: #FDDCC4;
       @include text-georgia(35px, 130%, $light-xl, 0.06em)
     }
 
-    p {
+    a {
       @include text-georgia(20px, 115%, $primary, 0.06em)
     }
 
