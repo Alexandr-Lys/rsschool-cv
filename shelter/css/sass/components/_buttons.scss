@@ -1,0 +1,60 @@
+.button-primary {
+  background: $primary;
+  border-style: none;
+  border-radius: 100px;
+  padding: 15px 45px;
+  height: 52px;
+  @include flex-align();
+  @include text-georgia(17px, 130%, $dark-3xl, 0.06em);
+  &:hover {
+    cursor: pointer;
+    background: $primary-light;
+  }
+}
+
+.button-light {
+  border: 2px solid $primary;
+  border-radius: 100px;
+  padding: 15px 45px;
+  background: $light-xl;
+  @include flex-align();
+  height: 52px;
+  @include text-georgia(17px, 130%, $dark-3xl, 0.06em);
+  &:hover {
+    cursor: pointer;
+    background: $primary-light;
+  }
+}
+
+.button-arrow {
+  width: 52px;
+  height: 52px;
+  border: 2px solid $primary;
+  border-radius: 100px;
+  margin: 0 53px 0 0;
+  @include flex-align();
+  color: $dark-3xl;
+  background: $light-xl;
+
+  &:hover {
+    cursor: pointer;
+    background: $primary-light;
+  }
+}
+
+.button-arrow-reverse {
+  transform: rotate(180deg);
+  width: 52px;
+  height: 52px;
+  border: 2px solid $primary;
+  border-radius: 100px;
+  margin-left: 53px;
+  @include flex-align();
+  color: $dark-3xl;
+  background: $light-xl;
+
+  &:hover {
+    cursor: pointer;
+    background: $primary-light;
+  }
+}
