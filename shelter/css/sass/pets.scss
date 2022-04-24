@@ -2,14 +2,15 @@
 @import "abstracts/fonts";
 @import "abstracts/mixins";
 @import "components/buttons";
+@import "components/logo";
 
 * {
   box-sizing: border-box;
   margin: 0;
+  padding: 0;
   text-decoration: none;
   color: $dark-3xl;
 }
-
 
 .our-pets {
   display: flex;
@@ -18,203 +19,190 @@
   width: 100%;
 }
 
-.wrapper {
-  margin: 0 auto;
-  width: 1200px;
+h3 {
+  @include text-georgia(35px, 130%, $dark-l);
+
+  @include media-tablet {
+    @include text-georgia(25px, 32.5px, $dark-l);
+  }
 }
-.wrapper-sticky{
+
+@import "layouts/background-wrapper";
+@import "layouts/wrapper";
+@import "components/burger";
+
+.wrapper-sticky {
   width: 100%;
   background: $light-xl;
   position: sticky;
-  top: 0.00001px;
+  top: 0.001px;
 }
+
 .header-container {
   padding: 30px 0;
   display: flex;
+  justify-content: space-between;
   align-items: center;
   background: $light-xl;
+  @include media-tablet{
+    justify-content: start;
+    column-gap: 43px;
+  }
 
   .nav-menu {
-    padding: 0;
-    margin-right: 0;
-    margin-left: 538px;
+    width: 443px;
     display: flex;
-
-
-    .nav-menu__item_active {
-      border-bottom: 4px #F1CDB3 solid;
+    justify-content: space-between;
+    @include media-tablet {
+      display: none;
     }
 
-    li {
-      margin-left: 35px;
+    .nav-menu__item {
       list-style: none;
+
+      .active {
+        color: $dark-l;
+        filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+      }
+
+      &_active {
+        border-bottom: 4px #F1CDB3 solid;
+      }
 
       a {
         @include text-arial(15px, 160%, $dark-l);
+
+        &:hover {
+          color: $dark-3xl;
+        }
       }
-    }
-  }
-
-  .logo {
-    width: 186px;
-    height: 60px;
-
-    h1 {
-      margin: 0;
-      @include text-georgia(32px, 110%, $dark-l, 0.06em);
-    }
-
-    .logo__subtitle {
-      margin-top: 9px;
-      margin-left: 4px;
-      @include text-arial(13px, 15px, $dark-3xl, 0.1em);
     }
   }
 }
 
 .pets {
-  width: 100%;
-  background: $light-l;
-  .pets__content {
-    margin: 80px 0 100px;
+  padding: 80px 0 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
-    h3 {
-      margin: 0 auto;
-      @include text-georgia(35px, 130%, $dark-l, 0.06em);
-      width: 400px;
-      text-align: center;
+  &__title {
+    width: 400px;
+    text-align: center;
+    padding-bottom: 60px;
+    @include media-laptop {
+      padding-bottom: 30px;
     }
+    @include media-tablet {
+      padding-bottom: 42px;
+    }
+  }
+
+  .cards-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 30px 40px;
+
+    .pets__card {
+      margin: 0;
+      width: 270px;
+      height: 435px;
+      background: $light-s;
+      @include text-georgia(20px, 23px, $dark-l, 0.06em);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      p {
+        margin: 30px 0;
+      }
+
+      button {
+        margin-bottom: 30px;
+      }
+
+      &:hover {
+        cursor: pointer;
+        background: $light-xl;
+
+        & button {
+          background: $primary-light;
+        }
+      }
+    }
+
+
+  }
+
+  .navigation {
+    padding-top: 60px;
+    display: flex;
+    justify-content: space-between;
+    width: 340px;
+  }
+
+  @include media-laptop {
+    padding-bottom: 75px;
+
     .cards-container {
-      margin: 5% 0;
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      grid-template-rows: repeat(2, 1fr);
-      gap: 30px 40px;
-
-      .pets__card {
-        margin: 0;
-        width: 270px;
-        height: 435px;
-        background: $light-s;
-        @include text-georgia(20px, 23px, $dark-l, 0.06em);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-
-        p {
-          margin: 30px 0;
-        }
-
-        button {
-          margin-bottom: 30px;
-        }
-
-        &:hover {
-          cursor: pointer;
-          background: $light-xl;
-
-          & button {
-            background: $primary-light;
-          }
-        }
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(3, 1fr);
+      .pets__card:nth-of-type(n+7) {
+        display: none;
       }
     }
 
     .navigation{
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      max-width: 28%;
-      button{
-        @include text-georgia(20px, 115%, $dark-3xl, 0.06em);
-        margin: 0;
-        padding: 0;
-      }
+      padding-top: 40px;
+    }
+  }
 
-      .button-arrow_disable{
-        margin: 0;
-        padding: 0;
-        @include text-georgia(20px, 115%, $dark-s, 0.06em);
-        border: 2px solid $dark-s;
-        &:hover{
-          cursor: auto;
-          background: $light-xl;
-        }
+  @include media-tablet{
+    padding: 42px 0;
+    &__title{
+      width: 300px;
+    }
+    .cards-container{
+      grid-template-columns: 1fr;
+      .pets__card:nth-of-type(n+4){
+        display: none;
       }
+    }
+
+    .navigation{
+      //padding-top: 40px;
+      width: 300px;
     }
   }
 }
 
-.footer{
-  width: 100%;
-  background-image: url(../../assets/images/noise_lines_transparent@2X.png), radial-gradient(100% 215.42% at 0% 0%, #5B483A 0%, #262425 100%);
+.button-left {
+  @include text-georgia(20px, 115%, $dark-3xl, 0.06em);
+  margin: 0;
+  padding: 0;
 
-  .footer-content {
-    margin-top: 40px;
-    display: flex;
-    justify-content: space-between;
+  &_disable {
+    margin: 0;
+    padding: 0;
+    @include text-georgia(20px, 115%, $dark-s, 0.06em);
+    border: 2px solid $dark-s;
 
-    h3 {
-      @include text-georgia(35px, 130%, $light-xl, 0.06em)
-    }
-
-    a {
-      @include text-georgia(20px, 115%, $primary, 0.06em)
-    }
-
-    .contacts {
-      max-width: 24%;
-      margin-top: 16px;
-
-      .contacts__mail {
-        margin: 40px 0;
-        @include flex-align();
-        justify-content: start;
-
-        img {
-          margin-right: 20px;
-        }
-      }
-
-      .contacts__phone {
-        @include flex-align();
-        justify-content: start;
-
-        img {
-          margin-right: 20px;
-        }
-      }
-    }
-
-    .locations {
-      max-width: 26%;
-      margin-top: 16px;
-
-      .locations__boston {
-        margin: 34px 0 32px;
-        @include flex-align();
-        justify-content: start;
-
-        img {
-          margin-right: 20px;
-        }
-      }
-
-      .locations__london {
-        @include flex-align();
-        justify-content: start;
-
-        img {
-          margin-right: 20px;
-        }
-      }
+    &:hover {
+      cursor: auto;
+      background: $light-xl;
     }
   }
+
+  &_fix {
+    background: $primary;
+
+    &:hover {
+      cursor: auto;
+      background: $primary;
+    }
+  }
+
 }
 
-
-
-
-
-
-
+@import "layouts/footer";

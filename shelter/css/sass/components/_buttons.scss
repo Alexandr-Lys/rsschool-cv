@@ -1,3 +1,18 @@
+%button-arrow {
+  width: 52px;
+  height: 52px;
+  border: 2px solid $primary;
+  border-radius: 100px;
+  @include flex-align();
+  color: $dark-3xl;
+  background: $light-xl;
+
+  &:hover {
+    cursor: pointer;
+    background: $primary-light;
+  }
+}
+
 .button-primary {
   background: $primary;
   border-style: none;
@@ -6,6 +21,7 @@
   height: 52px;
   @include flex-align();
   @include text-georgia(17px, 130%, $dark-3xl, 0.06em);
+
   &:hover {
     cursor: pointer;
     background: $primary-light;
@@ -20,21 +36,6 @@
   @include flex-align();
   height: 52px;
   @include text-georgia(17px, 130%, $dark-3xl, 0.06em);
-  &:hover {
-    cursor: pointer;
-    background: $primary-light;
-  }
-}
-
-.button-arrow {
-  width: 52px;
-  height: 52px;
-  border: 2px solid $primary;
-  border-radius: 100px;
-  margin: 0 53px 0 0;
-  @include flex-align();
-  color: $dark-3xl;
-  background: $light-xl;
 
   &:hover {
     cursor: pointer;
@@ -42,19 +43,11 @@
   }
 }
 
-.button-arrow-reverse {
+.button-left {
+  @extend %button-arrow;
+}
+
+.button-right {
+  @extend %button-arrow;
   transform: rotate(180deg);
-  width: 52px;
-  height: 52px;
-  border: 2px solid $primary;
-  border-radius: 100px;
-  margin-left: 53px;
-  @include flex-align();
-  color: $dark-3xl;
-  background: $light-xl;
-
-  &:hover {
-    cursor: pointer;
-    background: $primary-light;
-  }
 }

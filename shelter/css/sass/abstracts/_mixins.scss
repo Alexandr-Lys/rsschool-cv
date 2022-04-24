@@ -7,7 +7,7 @@
   color: $color;
 }
 
-@mixin text-georgia($size, $line-height, $color, $letter-spacing: normal) {
+@mixin text-georgia($size, $line-height, $color, $letter-spacing: 0.06em) {
   font-family: "Georgia", serif;
   font-weight: 400;
   font-size: $size;
@@ -20,4 +20,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+@mixin media-laptop{
+  @media (max-width: $laptop-width){ @content; }
+}
+@mixin media-tablet{
+  @media (max-width: $tablet-width){ @content; }
 }
