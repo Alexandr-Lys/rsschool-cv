@@ -3,6 +3,7 @@
 @import "abstracts/mixins";
 @import "components/buttons";
 @import "components/logo";
+@import "components/modal";
 
 * {
   box-sizing: border-box;
@@ -30,55 +31,17 @@ h3 {
 @import "layouts/background-wrapper";
 @import "layouts/wrapper";
 @import "components/burger";
+@import "layouts/header-dark";
+@import "layouts/footer";
 
 .wrapper-sticky {
   width: 100%;
   background: $light-xl;
   position: sticky;
   top: 0.001px;
+  z-index: 1600;
 }
 
-.header-container {
-  padding: 30px 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: $light-xl;
-  @include media-tablet{
-    justify-content: start;
-    column-gap: 43px;
-  }
-
-  .nav-menu {
-    width: 443px;
-    display: flex;
-    justify-content: space-between;
-    @include media-tablet {
-      display: none;
-    }
-
-    .nav-menu__item {
-      list-style: none;
-
-      .active {
-        color: $dark-l;
-        filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-      }
-
-      &_active {
-        border-bottom: 4px #F1CDB3 solid;
-      }
-
-      a {
-        @include text-arial(15px, 160%, $dark-l);
-
-        &:hover {
-          color: $dark-3xl;
-        }
-      }
-    }
-  }
-}
 
 .pets {
   padding: 80px 0 100px;
@@ -90,21 +53,39 @@ h3 {
     width: 400px;
     text-align: center;
     padding-bottom: 60px;
+
     @include media-laptop {
       padding-bottom: 30px;
     }
+
     @include media-tablet {
       padding-bottom: 42px;
     }
   }
 
   .cards-container {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    gap: 30px 40px;
+    width: 1200px;
+    height: 930px;
+    position: relative;
+    left: 0;
 
-    .pets__card {
+    .slider-item {
+      position: absolute;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      gap: 30px 40px;
+    }
+
+    .slider-item_next {
+      position: absolute;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      gap: 30px 40px;
+    }
+
+    .pets-slider__card {
       margin: 0;
       width: 270px;
       height: 435px;
@@ -146,63 +127,94 @@ h3 {
     padding-bottom: 75px;
 
     .cards-container {
-      grid-template-columns: repeat(2, 1fr);
-      grid-template-rows: repeat(3, 1fr);
-      .pets__card:nth-of-type(n+7) {
-        display: none;
+      width: 580px;
+      height: 1365px;
+      .slider-item {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+      }
+  
+      .slider-item_next {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(3, 1fr);
       }
     }
 
-    .navigation{
+    
+
+    .navigation {
       padding-top: 40px;
     }
   }
 
-  @include media-tablet{
+  @include media-tablet {
     padding: 42px 0;
-    &__title{
+
+    &__title {
       width: 300px;
     }
-    .cards-container{
-      grid-template-columns: 1fr;
-      .pets__card:nth-of-type(n+4){
-        display: none;
+
+    .cards-container {
+      width: 270px;
+      height: 1365px;
+      .slider-item{
+        grid-template-columns: 1fr;
       }
+      .slider-item_next{
+        grid-template-columns: 1fr;
+      }
+      
+
+     
     }
 
-    .navigation{
+    .navigation {
       //padding-top: 40px;
       width: 300px;
     }
   }
 }
-
-.button-left {
-  @include text-georgia(20px, 115%, $dark-3xl, 0.06em);
-  margin: 0;
-  padding: 0;
-
-  &_disable {
-    margin: 0;
-    padding: 0;
-    @include text-georgia(20px, 115%, $dark-s, 0.06em);
-    border: 2px solid $dark-s;
-
-    &:hover {
-      cursor: auto;
-      background: $light-xl;
-    }
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
   }
 
-  &_fix {
-    background: $primary;
-
-    &:hover {
-      cursor: auto;
-      background: $primary;
-    }
+  100% {
+    opacity: 1;
   }
-
 }
 
-@import "layouts/footer";
+@keyframes fadeOut {
+  100% {
+    opacity: 0;
+  }
+
+  0% {
+    opacity: 1;
+  }
+}
+
+.transition-fade {
+  animation-name: fadeIn;
+  animation-duration: 0.5s;
+}
+
+@keyframes burger-open {
+  from {
+    right: -320px;
+  }
+
+  to {
+    right: 0;
+  }
+}
+
+@keyframes burger-close {
+  from {
+    right: 0;
+  }
+
+  to {
+    right: -320px;
+  }
+}

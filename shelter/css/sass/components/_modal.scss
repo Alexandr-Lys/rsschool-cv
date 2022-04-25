@@ -44,11 +44,10 @@
 
 }
 
-/* ширина модального окна и его отступы от экрана */
+
 .modal {
     position: relative;
     width: 900px;
-    //height: 500px;
     background-color: $light-s;
     border-radius: 5px;
     box-shadow: 0px 2px 35px 14px rgba(13, 13, 13, 0.04);
@@ -99,7 +98,6 @@
             & li:before {
                 content: '';
                 margin-right: 10px;
-                //margin-bottom: 20px;
                 width: 4px;
                 height: 4px;
                 background: url('../../assets/icons/dot.png');
@@ -129,7 +127,6 @@
 
         }
     }
-
     @include media-tablet {
         width: 240px;
         justify-content: center;
@@ -160,9 +157,6 @@
 
         }
     }
-
-
-
 }
 
 .modal__close-icon {

@@ -1,32 +1,4 @@
-// let burger = document.querySelector(".burger")
-// let burgerDark = document.querySelector(".burger-dark")
-// let menu = document.querySelector(".nav-menu")
-// let burgerBlackout = document.querySelector(".burger-blackout")
-// if(burger){
-//     burger.addEventListener("click", function (){
-//         if(burger.className === "burger burger_active"){
-//             burger.className = "burger"
-//             menu.className = "nav-menu"
-//             burgerBlackout.className = "burger-blackout"
-//         }else{
-//             burger.className = "burger burger_active"
-//             menu.className = "nav-menu nav-menu_burger"
-//             burgerBlackout.className = "burger-blackout_active"
-//         }
-//     })
-// }else{
-//     burgerDark.addEventListener("click", function (){
-//         if(burgerDark.className === "burger-dark burger-dark_active"){
-//             burgerDark.className = "burger-dark"
-//             menu.className = "nav-menu"
-//             burgerBlackout.className = "burger-blackout"
-//         }else{
-//             burgerDark.className = "burger-dark burger-dark_active"
-//             menu.className = "nav-menu nav-menu_burger"
-//             burgerBlackout.className = "burger-blackout_active"
-//         }
-//     })
-// }
+
 
 
 const pets = [
@@ -157,7 +129,7 @@ class Modal {
         this.modalCloseBtn = '';
         this.overlay = '';
 
-        //User Modal
+
         this.name = name;
         this.img = img;
         this.type = type;
@@ -170,7 +142,7 @@ class Modal {
     }
 
     buildModal(content) {
-        //Overlay
+
         this.overlay = this.createDomNode(this.overlay, 'div', 'overlay');
 
         this.modal = this.createDomNode(this.modal, 'div', this.classes);
@@ -178,7 +150,7 @@ class Modal {
 
         this.modalContent = this.createDomNode(this.modalContent, 'div', 'modal-content');
 
-        this.modalContent.innerHTML =  `    
+        this.modalContent.innerHTML = `    
         <h3 class="modal-content__title">${this.name}</h3>
         <h4 class="modal-content__subtitle">${this.type} - ${this.breed}</h4>
         <p class="modal-content__description">${this.description}</p>
@@ -192,7 +164,6 @@ class Modal {
 
         this.modalCloseBtn = this.createDomNode(this.modalCloseBtn, 'div', 'modal__close-icon');
         this.modalCloseBtn.innerHTML = '<img src="assets/icons/modal_close_button.png" class = "modal__close-icon-img" alt="">'
-        //this.setContent(content);
 
         this.appendModalElements();
 
@@ -232,40 +203,126 @@ class Modal {
         document.body.style.overflow = 'hidden';
         document.querySelector('.modal').classList.add('open')
     }
-    
+
     closeModal(e) {
         let classes = e.target.classList;
         let overlay = document.querySelector('.overlay');
-        if((classes.contains('overlay') || classes.contains('modal__close-icon-img')) && overlay) {
+        if ((classes.contains('overlay') || classes.contains('modal__close-icon-img')) && overlay) {
             document.querySelector('.modal').classList.remove('open')
-            document.querySelector('.modal').classList.add('close') 
+            document.querySelector('.modal').classList.add('close')
             document.querySelector('.close').addEventListener('animationend', () => {
                 overlay.remove();
                 document.body.style.overflow = 'visible';
-            }) 
+            })
         }
     }
-    // renderModal() {
-    //     let content = this.buildModal();
-    // }
+
 }
 let mediaQuery;
-const mediaQueryLaptop = window.matchMedia('(max-width: 1279px)')
-const mediaQueryTablet = window.matchMedia('(max-width: 767px)')
-let carousel = document.querySelector(".slider-wrapper")
-
-
+const mediaQueryLaptop = window.matchMedia('(max-width: 1279px)');
+const mediaQueryTablet = window.matchMedia('(max-width: 767px)');
+let carousel;
 let randomValuesArrayStorage;
+let pageFlag = '';
+let pageCount = 1;
+let quantityArrays;
 
 window.onload = function () {
-    addButtonsClickHandler();
+    if (document.querySelector('.slider-wrapper')) {
+        pageFlag = 'main'
+        carousel = document.querySelector(".slider-wrapper")
+        addButtonsClickHandler();
 
-    renderPetsCardsToDom();
+        renderPetsCardsToDom();
 
-    addCardsClickHandler();
+        addCardsClickHandler();
+        if (mediaQueryTablet.matches) {
+            
+            addBurgerMenu();
+        }
+    } else {
+        pageFlag = 'pets'
+        carousel = document.querySelector(".cards-container")
+        let generateSliderCardsStorage = generateSliderCards(pets);
+        addPetsPageButtonsClickHandler(generateSliderCardsStorage);
+        renderPetsPageCardsToDom(generateSliderCardsStorage);
+        addCardsClickHandler();
+    }
+    
+    if (mediaQueryTablet.matches) {
+    
+        addBurgerMenu();
+    }
+
 }
 
+const addBurgerMenu = () => {
+    let burger = document.querySelector(".burger")
+    let overlay = document.createElement('div');
+    overlay.classList.add('overlay');
+    let menuWrapper = document.querySelector('.nav-menu-wrapper');
+    let menu = document.querySelector('.nav-menu');
+    let flag = true;
+    burger.addEventListener("click", function () {
+        if(flag){
+            openBurgerMenu(burger, overlay, menuWrapper, menu);
+            flag = false;
+        }else{
+            closeBurgerMenu(burger, overlay, menuWrapper, menu);
+            flag = true;
+        }
+    })
+    overlay.addEventListener('click', () => {
+        closeBurgerMenu(burger, overlay, menuWrapper, menu);
+        flag = true;
+    } )
+}
+const openBurgerMenu = (burger, overlay, menuWrapper, menu) => {
+    document.body.style.overflow = 'hidden';
+    document.body.append(overlay);
+    burger.classList.add("burger_active");
+    menuWrapper.classList.add('nav-menu-wrapper_open');
+    menu.classList.add("nav-menu_burger");
+}
+
+const closeBurgerMenu = (burger, overlay, menuWrapper, menu) => {
+        const removeEventClasses = () => {
+            document.body.style.overflow = 'visible';
+            burger.classList.remove('burger_active')
+            menuWrapper.classList.remove('nav-menu-wrapper_open');
+            menu.classList.remove("nav-menu_burger");
+            overlay.remove();
+            menuWrapper.classList.remove('nav-menu-wrapper_close');
+            document.removeEventListener('animationend', removeEventClasses);
+        }
+        menuWrapper.classList.add('nav-menu-wrapper_close');
+        document.addEventListener('animationend', removeEventClasses);
+        
+};
+
+const addButtonsClickHandler = () => {
+    document.querySelector(".button-left").addEventListener('click', (e) => {
+        carousel.classList.add("transition-left");
+        renderPetsCardsToDom("left");
+    });
+    document.querySelector(".button-right").addEventListener('click', (e) => {
+        carousel.classList.add("transition-right");
+        renderPetsCardsToDom("right");
+    });
+    carousel.addEventListener("animationend", (animationEvent) => {
+        if (animationEvent.animationName === "move-left") {
+            carousel.classList.remove("transition-left");
+            document.querySelector(".slider-item").innerHTML = document.querySelector(".slider-item_left").innerHTML;
+            document.querySelector(".slider-item_left").remove();
+        } else {
+            carousel.classList.remove("transition-right");
+            document.querySelector(".slider-item").innerHTML = document.querySelector(".slider-item_right").innerHTML;
+            document.querySelector(".slider-item_right").remove();
+        }
+    });
+}
 const renderPetsCardsToDom = (direction) => {
+
     let sliderWrapper = getSliderWrapper();
     if (direction === "left") {
         let divAfter = document.createElement("div")
@@ -290,9 +347,119 @@ const renderPetsCardsToDom = (direction) => {
     }
 }
 
+const addPetsPageButtonsClickHandler = (generateSliderCardsStorage, action) => {
+    const moveLeft = () => {
+        document.querySelector(".button-right").classList.remove('button_disable')
+        document.querySelector(".button-right-end").classList.remove('button_disable');
+        if (pageCount !== 1) {
+            document.querySelector(".button-left").classList.remove('button_disable')
+            pageCount--
+            document.querySelector('.button-counter').innerHTML = pageCount;
+            carousel.classList.add("transition-fade");
+            renderPetsPageCardsToDom(generateSliderCardsStorage, pageCount);
+            document.querySelector(".button-left").removeEventListener('click', moveLeft);
+            document.querySelector(".button-right").removeEventListener('click', moveRight);
+            document.querySelector(".button-left-end").removeEventListener('click', moveLeftEnd);
+            document.querySelector(".button-right-end").removeEventListener('click', moveRightEnd);
+        }
+
+    }
+    const moveRight = () => {
+        document.querySelector(".button-left").classList.remove('button_disable');
+        document.querySelector(".button-left-end").classList.remove('button_disable');
+        if (pageCount !== quantityArrays) {
+            document.querySelector('.button-right').classList.remove('button_disable');
+            pageCount++;
+            document.querySelector('.button-counter').innerHTML = pageCount;
+            carousel.classList.add("transition-fade");
+            renderPetsPageCardsToDom(generateSliderCardsStorage, pageCount);
+            document.querySelector(".button-left").removeEventListener('click', moveLeft);
+            document.querySelector(".button-right").removeEventListener('click', moveRight);
+            document.querySelector(".button-left-end").removeEventListener('click', moveLeftEnd);
+            document.querySelector(".button-right-end").removeEventListener('click', moveRightEnd);
+        }
+    }
+
+    const moveLeftEnd = () => {
+        if (pageCount !== 1) {
+            pageCount = 1
+            document.querySelector('.button-counter').innerHTML = pageCount;
+            carousel.classList.add("transition-fade");
+            renderPetsPageCardsToDom(generateSliderCardsStorage, pageCount);
+            document.querySelector(".button-left").removeEventListener('click', moveLeft);
+            document.querySelector(".button-right").removeEventListener('click', moveRight);
+            document.querySelector(".button-left-end").removeEventListener('click', moveLeftEnd);
+            document.querySelector(".button-right-end").removeEventListener('click', moveRightEnd);
+        }
+    }
+    const moveRightEnd = () => {
+        if (pageCount !== quantityArrays) {
+            pageCount = quantityArrays
+            document.querySelector('.button-counter').innerHTML = pageCount;
+            carousel.classList.add("transition-fade");
+            renderPetsPageCardsToDom(generateSliderCardsStorage, pageCount);
+            document.querySelector(".button-left").removeEventListener('click', moveLeft);
+            document.querySelector(".button-right").removeEventListener('click', moveRight);
+            document.querySelector(".button-left-end").removeEventListener('click', moveLeftEnd);
+            document.querySelector(".button-right-end").removeEventListener('click', moveRightEnd);
+        }
+    }
+
+    document.querySelector(".button-left").addEventListener('click', moveLeft);
+    document.querySelector(".button-right").addEventListener('click', moveRight);
+    document.querySelector(".button-left-end").addEventListener('click', moveLeftEnd);
+    document.querySelector(".button-right-end").addEventListener('click', moveRightEnd);
+
+    carousel.addEventListener("animationend", (animationEvent) => {
+        if (pageCount === 1) {
+            document.querySelector(".button-left").classList.add('button_disable')
+            document.querySelector(".button-left-end").classList.add('button_disable')
+            document.querySelector(".button-right").classList.remove('button_disable')
+            document.querySelector(".button-right-end").classList.remove('button_disable')
+        }
+        if (pageCount === quantityArrays) {
+            document.querySelector('.button-right').classList.add('button_disable')
+            document.querySelector(".button-right-end").classList.add('button_disable')
+            document.querySelector(".button-left").classList.remove('button_disable')
+            document.querySelector(".button-left-end").classList.remove('button_disable')
+        }
+        carousel.classList.remove("transition-fade");
+        document.querySelector(".slider-item").innerHTML = document.querySelector(".slider-item_next").innerHTML;
+        document.querySelector(".slider-item_next").remove();
+
+        document.querySelector(".button-left").addEventListener('click', moveLeft);
+        document.querySelector(".button-right").addEventListener('click', moveRight);
+        document.querySelector(".button-left-end").addEventListener('click', moveLeftEnd);
+        document.querySelector(".button-right-end").addEventListener('click', moveRightEnd);
+    });
+
+
+}
+const renderPetsPageCardsToDom = (generateSliderCardsStorage, pageCount = 0) => {
+    let sliderWrapper = getSliderWrapper();
+    if (pageCount !== 0) {
+        let divAfter = document.createElement("div")
+        divAfter.className = "slider-item_next";
+        sliderWrapper.append(divAfter);
+        generateSliderCardsStorage[pageCount - 1].forEach(card => {
+            document.querySelector(".slider-item_next").append(card.generateSliderCard());
+        });
+    } else {
+        sliderWrapper = sliderWrapper.innerHTML += `<div class = "slider-item"></div>`
+        generateSliderCardsStorage[0].forEach(card => {
+            document.querySelector(".slider-item").append(card.generateSliderCard());
+        });
+    }
+
+}
+
 const getSliderWrapper = () => {
-    let petsSliderContainer = document.querySelector('.slider-wrapper');
-    //petsSliderContainer.innerHTML = '';
+    let petsSliderContainer;
+    if (document.querySelector('.slider-wrapper')) {
+        petsSliderContainer = document.querySelector('.slider-wrapper');
+    } else {
+        petsSliderContainer = document.querySelector('.cards-container');
+    }
     return petsSliderContainer;
 }
 
@@ -304,10 +471,19 @@ const generateSliderCards = (pets) => {
     return setRandomArrayToCards(cards);
 }
 
+
 const setRandomArrayToCards = (cards) => {
-    return getRandomValuesArray(cards).map(e => {
-        return cards[e];
-    });
+    if (pageFlag === 'main') {
+        return getRandomValuesArray(cards).map(e => {
+            return cards[e];
+        });
+    } else {
+        return getRandomValuesArray(cards).map(arr => {
+            return arr.map(e => {
+                return cards[e];
+            });
+        })
+    }
 }
 
 
@@ -315,83 +491,94 @@ const getRandomValuesArray = (cards) => {
     const getRandomValue = () => {
         return Math.floor(Math.random() * pets.length);
     }
-    let quantityArrayElements = 3;
-    if(mediaQueryLaptop.matches){
-        quantityArrayElements = 2;
-    }else if(mediaQueryTablet.matches){
-        quantityArrayElements = 1;
-    }
+    let quantityArrayElements;
+    if (pageFlag === 'main') {
+        quantityArrayElements = 3;
+        if (mediaQueryLaptop.matches) {
+            quantityArrayElements = 2;
+        } else if (mediaQueryTablet.matches) {
+            quantityArrayElements = 1;
+        }
+        let randomValuesArray = [];
+        while (randomValuesArray.length < quantityArrayElements) {
+            let randomValue = getRandomValue();
+            if (randomValuesArray.length !== 0) {
+                if (!randomValuesArray.includes(randomValue)) {
+                    randomValuesArray.push(randomValue);
+                }
 
-
-    let randomValuesArray = [];
-    while (randomValuesArray.length < quantityArrayElements) {
-        console.log(quantityArrayElements)
-        let randomValue = getRandomValue();
-        if (randomValuesArray.length !== 0) {
-            if (!randomValuesArray.includes(randomValue)) {
+            } else {
                 randomValuesArray.push(randomValue);
             }
+        };
 
-        } else {
-            randomValuesArray.push(randomValue);
-        }
-    };
+        if (randomValuesArrayStorage && quantityArrayElements !== 8) {
+            for (let i = 0; i < 3; i++) {
+                if (randomValuesArrayStorage.includes(randomValuesArray[i])) {
+                    randomValuesArray = []
+                    while (randomValuesArray.length < quantityArrayElements) {
+                        let randomValue = getRandomValue();
+                        if (randomValuesArray.length !== 0) {
+                            if (!randomValuesArray.includes(randomValue)) {
+                                randomValuesArray.push(randomValue);
+                            }
 
-    if (randomValuesArrayStorage) {
-        for (let i = 0; i < 3; i++) {
-            if (randomValuesArrayStorage.includes(randomValuesArray[i])) {
-                randomValuesArray = []
-                while (randomValuesArray.length < quantityArrayElements) {
-                    let randomValue = getRandomValue();
-                    if (randomValuesArray.length !== 0) {
-                        if (!randomValuesArray.includes(randomValue)) {
+                        } else {
                             randomValuesArray.push(randomValue);
                         }
-
-                    } else {
-                        randomValuesArray.push(randomValue);
                     }
+                    i = -1
                 }
-                i = -1
             }
         }
-    }
-    randomValuesArrayStorage = randomValuesArray;
-    return randomValuesArray;
-}
+        randomValuesArrayStorage = randomValuesArray;
+        return randomValuesArray;
 
-
-
-const addButtonsClickHandler = () => {
-    document.querySelector(".button-left").addEventListener('click', (e) => {
-        carousel.classList.add("transition-left");
-        renderPetsCardsToDom("left");
-    });
-    document.querySelector(".button-right").addEventListener('click', (e) => {
-        carousel.classList.add("transition-right");
-        renderPetsCardsToDom("right");
-    });
-    carousel.addEventListener("animationend", (animationEvent) => {
-        if (animationEvent.animationName === "move-left") {
-            carousel.classList.remove("transition-left");
-            document.querySelector(".slider-item").innerHTML = document.querySelector(".slider-item_left").innerHTML;
-            document.querySelector(".slider-item_left").remove();
+    } else {
+        let randomValuesArray;
+        let randomValuesArrayToArray = [];
+        if (mediaQueryLaptop.matches && window.matchMedia("(min-width: 768px)").matches) {
+            console.log(mediaQueryLaptop.matches);
+            console.log(pageFlag);
+            quantityArrays = 8
+            quantityArrayElements = 6;
+        } else if (mediaQueryTablet.matches) {
+            quantityArrays = 16;
+            quantityArrayElements = 3;
         } else {
-            carousel.classList.remove("transition-right");
-            document.querySelector(".slider-item").innerHTML = document.querySelector(".slider-item_right").innerHTML;
-            document.querySelector(".slider-item_right").remove();
+            quantityArrays = 6;
+            quantityArrayElements = 8;
         }
-    });
+        while (randomValuesArrayToArray.length < quantityArrays) {
+            randomValuesArray = [];
+            while (randomValuesArray.length < quantityArrayElements) {
+                let randomValue = getRandomValue();
+                if (randomValuesArray.length !== 0) {
+                    if (!randomValuesArray.includes(randomValue)) {
+                        randomValuesArray.push(randomValue);
+                    }
+                } else {
+                    randomValuesArray.push(randomValue);
+                }
+            };
+            randomValuesArrayToArray.push(randomValuesArray);
+        }
+        return randomValuesArrayToArray;
+    }
 }
 
-const  renderModalWindow = (clickedCardData) => {
+
+
+
+
+const renderModalWindow = (clickedCardData) => {
     let modal = new Modal('modal', clickedCardData);
     modal.buildModal();
 }
 
 const addCardsClickHandler = () => {
     document.querySelector('.slider-item').addEventListener('click', (e) => {
-        if(e.target.closest('.pets-slider__card')){
+        if (e.target.closest('.pets-slider__card')) {
             let clickedCardName = e.target.closest('.pets-slider__card').getAttribute('name');
             let clickedCardData = getClickedCardData(clickedCardName);
             renderModalWindow(clickedCardData)
@@ -401,4 +588,4 @@ const addCardsClickHandler = () => {
 
 const getClickedCardData = (name) => {
     return pets.find(e => e.name == name);
-}
+};

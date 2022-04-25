@@ -6,7 +6,9 @@
   @include flex-align();
   color: $dark-3xl;
   background: $light-xl;
-
+  @include text-georgia(20px, 115%, $dark-3xl, 0.06em);
+  margin: 0;
+  padding: 0;
   &:hover {
     cursor: pointer;
     background: $primary-light;
@@ -43,11 +45,26 @@
   }
 }
 
-.button-left {
-  @extend %button-arrow;
-}
 
-.button-right {
+
+.button{
   @extend %button-arrow;
-  transform: rotate(180deg);
+  &_disable {
+    color: $dark-s;
+    border: 2px solid $dark-s;
+    &:hover {
+      cursor: auto;
+      background: $light-xl;
+    }
+  }
+  &_fix {
+    background: $primary;
+    &:hover {
+      cursor: auto;
+      background: $primary;
+    }
+  }
+  &_right{
+    transform: rotate(180deg);
+  }
 }
